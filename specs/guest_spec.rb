@@ -31,14 +31,14 @@ class TestGuest < MiniTest::Test
     assert_equal('Wohoo!', result)
   end
 
-  def test_asses_singing()
-    result = @guest.asses_singing(@guest2, @catalogue[1])
+  def test_assess_singing()
+    result = @guest.assess_singing(@guest2, @catalogue[1])
     assert_equal('Amazing, you are great!', result)
   end
 
   def test_asses_singing__too_hard()
-    result = @guest.asses_singing(@guest2, @catalogue[0])
-    assert_equal("Oh wow, you suck", result)
+    result = @guest.assess_singing(@guest2, @catalogue[0])
+    assert_equal('Oh wow, you suck', result)
   end
 
 end
