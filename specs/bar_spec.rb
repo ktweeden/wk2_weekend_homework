@@ -6,6 +6,7 @@ class TestBar < MiniTest::Test
 
   def setup()
     @bar = Bar.new('Kool Kareoke', 5, 100)
+    @medium_bar = Bar.new('Medium Melodies', 2, 75)
     @small_bar = Bar.new('Tiny Tunes', 1, 50)
     @guest = Guest.new('Kate', 28, 'Halo', 20)
     @guest_array = [
@@ -16,7 +17,7 @@ class TestBar < MiniTest::Test
       Guest.new('Bob', 15, 'Believe', 10),
       Guest.new('Sarah', 38, 'Sinnerman', 30),
       Guest.new('Andy', 44, 'Free Falling', 20),
-      Guest.new('Jack', 28, 'Never Going Back Again', 1),
+      Guest.new('Jack', 28, 'Never Going Back Again', 10),
       Guest.new('Emma', 23, 'Wannabe', 30),
       Guest.new('Harry', 32, 'Both Sides Now', 45)
     ]
@@ -50,6 +51,23 @@ class TestBar < MiniTest::Test
     @small_bar.check_in_multiple_guests(@guest_array)
     @small_bar.check_in_multiple_guests(@guest_array)
     assert_equal(10, @small_bar.waiting_list().length)
+  end
+
+  def test_check_in_multiple_guests__not_enough_space_in_one_room()
+    @medium_bar.check_in_multiple_guests(@guest_array)
+    @medium_bar.check_in_guest(@guest)
+    @medium_bar.check_in_multiple_guests(@guest_array)
+    assert_equal(1, @medium_bar.waiting_list().length)
+  end
+
+  def test_charge_guest()
+    @bar.charge_guest(@guest, 5)
+    assert_equal(15, @guest.wallet)
+  end
+
+  def test_charge_guest__not_enough_money()
+    @bar.charge_guest(@guest, 30)
+    assert_equal(20, @guest.wallet)
   end
 
 end

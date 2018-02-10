@@ -1,6 +1,6 @@
 class Guest
 
-  attr_reader :name
+  attr_reader :name, :wallet
 
   def initialize(name, age, fave_song, wallet)
     @name = name
@@ -11,4 +11,11 @@ class Guest
     @tollerance = rand(1...10)
   end
 
+  def pay(amount)
+    @wallet -= amount
+  end
+
+  def can_afford?(amount)
+    return amount <= @wallet
+  end
 end

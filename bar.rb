@@ -8,6 +8,7 @@ class Bar
     @rooms = []
     @waiting_list = []
     @till = cash
+    @entry_fee = 5
     create_rooms(number_of_rooms)
   end
 
@@ -20,7 +21,7 @@ class Bar
       if available_room == nil
         @waiting_list << guest
       else
-        available_room.add_guest_to_room(guest)
+        available_room.add_guest_to_room(guest) if charge_guest(guest, @entry_fee) != nil
       end
   end
 
@@ -28,11 +29,18 @@ class Bar
     available_room = @rooms.find() do |room|
       (room.capacity - room.guests().length) >= guest_array.length()
     end
+
     if available_room == nil
-      guest_array.each() {|guest| @waiting_list << guest}
+      guest_array.each { |guest| check_in_guest(guest) }
     else
-      guest_array.each() {|guest| available_room.add_guest_to_room(guest)}
+      guest_array.each() do |guest|
+        available_room.add_guest_to_room(guest) if charge_guest(guest, @entry_fee) != nil
+      end
     end
+  end
+
+  def charge_guest(guest, amount)
+    guest.pay(amount) if guest.can_afford?(amount)
   end
 
 
