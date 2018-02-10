@@ -1,6 +1,6 @@
 class Guest
 
-  attr_reader :name, :wallet
+  attr_reader :name, :wallet, :ability, :tolerance
 
   def initialize(name, age, fave_song, wallet)
     @name = name
@@ -8,7 +8,6 @@ class Guest
     @fave_song = fave_song
     @wallet = wallet
     @ability = rand(1...10)
-    @tollerance = rand(1...10)
   end
 
   def pay(amount)
@@ -18,4 +17,15 @@ class Guest
   def can_afford?(amount)
     return amount <= @wallet
   end
+
+  def find_favourite_song(catalogue)
+    p 'Wohoo!' if catalogue.find {|song| song.title() == @fave_song}
+  end
+
+  def asses_singing(singer, song)
+    exclamation = 'Amazing, you are great!' if singer.ability > song.difficulty
+    exclamation =  "Oh wow, you suck" if singer.ability < song.difficulty
+    p exclamation
+  end
+
 end

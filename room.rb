@@ -12,6 +12,7 @@ class Room
 
   def add_guest_to_room(guest)
     @guests << guest
+    guest.find_favourite_song(@catalogue)
   end
 
   def remove_guest_from_room(guest)
