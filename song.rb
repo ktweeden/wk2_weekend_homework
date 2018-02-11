@@ -1,5 +1,4 @@
 class Song
-
   attr_reader :title, :difficulty
 
   def initialize(title, difficulty)

@@ -1,5 +1,4 @@
 class Room
-
   attr_reader :name, :guests, :capacity, :catalogue
 
   def initialize(name)
@@ -22,5 +21,4 @@ class Room
   def add_song_to_room(song)
     @catalogue << song
   end
-
 end

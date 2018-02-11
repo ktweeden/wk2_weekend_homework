@@ -13,29 +13,31 @@ class Bar
   end
 
   def create_rooms(number_of_rooms)
-    (1..number_of_rooms).each {|number| @rooms << Room.new("Room #{number}")}
+    (1..number_of_rooms).each { |number| @rooms << Room.new("Room #{number}") }
   end
 
   def check_in_guest(guest)
     available_room = find_available_room(1)
-      if available_room == nil
-        @waiting_list << guest
-      else
-        add_guest_to_room_if_have_enough_money(guest, available_room)
-      end
+    if available_room.nil?
+      @waiting_list << guest
+    else
+      add_guest_to_room_if_have_enough_money(guest, available_room)
+    end
   end
 
   def check_in_multiple_guests(guest_array)
     available_room = find_available_room(guest_array.length)
-    if available_room == nil
-      guest_array.each {|guest| check_in_guest(guest)}
+    if available_room.nil?
+      guest_array.each { |guest| check_in_guest(guest) }
     else
-      guest_array.each {|guest| add_guest_to_room_if_have_enough_money(guest, available_room)}
+      guest_array.each do |guest|
+        add_guest_to_room_if_have_enough_money(guest, available_room)
+      end
     end
   end
 
   def find_available_room(group_size)
-    @rooms.find {|room| (room.capacity - room.guests.length) >= group_size}
+    @rooms.find { |room| (room.capacity - room.guests.length) >= group_size }
   end
 
   def charge_guest(guest, amount)
@@ -43,6 +45,6 @@ class Bar
   end
 
   def add_guest_to_room_if_have_enough_money(guest, room)
-    room.add_guest_to_room(guest) if charge_guest(guest, @entry_fee) != nil
+    room.add_guest_to_room(guest) if !charge_guest(guest, @entry_fee).nil?
   end
 end
