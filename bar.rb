@@ -45,6 +45,6 @@ class Bar
   end
 
   def add_guest_to_room_if_have_enough_money(guest, room)
-    room.add_guest_to_room(guest) if !charge_guest(guest, @entry_fee).nil?
+    room.add_guest_to_room(guest) unless charge_guest(guest, @entry_fee).nil?
   end
 end
