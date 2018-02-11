@@ -14,7 +14,7 @@ class TestRoom < MiniTest::Test
     assert_equal('Number 5', @room.name)
   end
 
-  def test_room_has_capacity()
+  def test_room_has_capacity
     assert_equal(10, @room.capacity)
   end
 
