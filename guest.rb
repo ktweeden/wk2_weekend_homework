@@ -23,7 +23,7 @@ class Guest
   end
 
   def assess_singing(singer, song)
-    exclamation = 'Amazing, you are great!' if singer.ability > song.difficulty
+    exclamation = 'Amazing, you are great!' if singer.ability >= song.difficulty
     exclamation = 'Oh wow, you suck' if singer.ability < song.difficulty
     p exclamation
   end

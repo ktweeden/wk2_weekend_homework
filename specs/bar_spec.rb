@@ -30,7 +30,7 @@ class TestBar < MiniTest::Test
     assert_equal(5, @bar.rooms.length)
   end
 
-  def test_check_in_guest
+  def test_check_in_guest__has_space
     @bar.check_in_guest(@guest)
     assert_equal(@guest, @bar.rooms[0].guests[0])
   end
@@ -59,7 +59,7 @@ class TestBar < MiniTest::Test
     assert_equal(1, @medium_bar.waiting_list.length)
   end
 
-  def test_charge_guest
+  def test_charge_guest__enough_money
     @bar.charge_guest(@guest, 5)
     assert_equal(15, @guest.wallet)
   end
